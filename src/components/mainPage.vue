@@ -50,7 +50,6 @@ export default {
 				fetch(`https://api.github.com/users/${this.search}`)
 				.then(result => result.json())
 				.then(data => {
-					console.log(data)
 					this.users = data
 				})
 			}else {
@@ -81,7 +80,7 @@ export default {
 	margin: auto;
 }
 .show-more {
-	margin: 0 0 5% 45%;
+	margin: 0 0 2% 45%;
 }
 
 </style>
