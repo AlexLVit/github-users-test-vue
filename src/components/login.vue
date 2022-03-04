@@ -14,7 +14,7 @@
 export default {
     data() {
         return {
-			client_id: document.location.origin ? "eb6e21056f011a996e0b" : "e68baefb170193925fd0"
+			client_id: document.location.origin == "http://localhost:8080/" ? "eb6e21056f011a996e0b" : "e68baefb170193925fd0"
         }
     }
 }
