@@ -2,7 +2,7 @@
     <div class="login">
         <h3>Login form:</h3>
         <button type="button" class="btn btn-outline-secondary">
-			<a class="login__link" :href="`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${document.location.origin}/main`">
+			<a class="login__link" :href="`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`">
                 <font-awesome-icon icon="fa-brands fa-github" />
                 Login via GitHub
             </a>
@@ -14,7 +14,8 @@
 export default {
     data() {
         return {
-			client_id: document.location.origin == "http://localhost:8080/" ? "eb6e21056f011a996e0b" : "e68baefb170193925fd0"
+            redirect_uri: "http://localhost:8080/main",
+			client_id: "eb6e21056f011a996e0b"
         }
     }
 }
