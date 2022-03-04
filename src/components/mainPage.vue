@@ -1,13 +1,13 @@
 <template>
 	<div class="main">
 		<div class="input-group mb-3">
-			<input type="text" class="form-control" id="search" @keypress.enter="getUserByLogin()" placeholder="search with login" v-model="search" aria-label="Example text with button addon" aria-describedby="button-addon1">
-			<button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="getUserByLogin()">
+			<input type="text" class="form-control" id="search" placeholder="search with login" @input="getUserByLogin()" v-model="search" aria-label="Example text with button addon" aria-describedby="button-addon1">
+			<button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="getUserByLogin()" :disabled="!search.length">
 				<font-awesome-icon icon="fa-solid fa-magnifying-glass" />
 			</button>
 		</div>
 		<userList :list="users"/>
-		<button v-if="users && Array.isArray(users)" type="button" class="btn btn-secondary" @click="getContent(users[users.length - 1].id)">Show more</button>
+		<button v-if="users && Array.isArray(users)" type="button" class="btn btn-secondary show-more" @click="getContent(users[users.length - 1].id)">Show more</button>
 	</div>
 </template>
 
@@ -73,8 +73,8 @@ export default {
 	width: 720px;
 	margin: auto;
 }
-button {
-	margin-left: 45%;
+.show-more {
+	margin: 0 0 5% 45%;
 }
 
 </style>
