@@ -17,7 +17,7 @@
                 <extended v-if="extendedIds.includes(user.id)" :login="user.login"/>
             </li>
         </ul>
-        <div v-else class="user">
+        <div v-else-if="list && !Array.isArray(list) && !list.message" class="user">
             <div class="user__container">
                 <div class="flex-container">
                     <img v-if="list.avatar_url" class="user__avatar" :src="`${list.avatar_url}`" alt="">
@@ -33,6 +33,9 @@
                 </div>
                 <extended v-if="extendedIds.includes(list.id)" :login="list.login"/>
             </div>
+        </div>
+        <div class="error-message" v-else>
+            Sorry...there is no user with this login, try again !
         </div>
     </div>
 </template>
@@ -93,5 +96,10 @@ export default {
 }
 .flex-container{
     display: flex;
+}
+.error-message {
+    text-align: center;
+    color: #6c757d;
+    opacity: 0.5;
 }
 </style>
