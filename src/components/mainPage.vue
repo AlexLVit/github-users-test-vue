@@ -1,0 +1,88 @@
+<template>
+	<div class="main">
+		<div class="input-group mb-3">
+			<input type="text" class="form-control" id="search" @keypress.enter="getUserByLogin()" placeholder="search with login" v-model="search" aria-label="Example text with button addon" aria-describedby="button-addon1">
+			<button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="getUserByLogin()">
+				<font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+			</button>
+		</div>
+		<userList :list="users"/>
+		<button v-if="users && Array.isArray(users)" type="button" class="btn btn-secondary" @click="getContent(users[users.length - 1].id)">Show more</button>
+	</div>
+</template>
+
+<script>
+import userList from '@/components/userList.vue';
+export default {
+	name: 'mainPage',
+	components: {
+		userList
+	},
+	props: {
+	},
+	data() {
+		return {
+			users: [],
+			userInfo: [],
+			search: ''
+		}
+	},
+	mounted() {
+		this.getContent()
+	},
+	methods: {
+		getContent(id = 1, limit = 10) {
+			fetch(`https://api.github.com/users?since=${id}&per_page=${limit}`)
+			.then(result => result.json())
+			.then(data => {
+				if(this.users.length) {
+					this.users = [...this.users, ...data]
+				} else {
+					this.users = data
+				}
+			})
+			.catch(err => console.log(err))
+		},
+		getUserByLogin() {
+			fetch(`https://api.github.com/users/${this.search}`)
+			.then(result => result.json())
+			.then(data => {
+				this.users = data
+			})
+		}
+	},
+	watch: {
+		search: function() {
+			if(this.search == '') {
+				this.getContent()
+			}
+		}
+	},
+	computed: {
+		// filteredList() {
+		// 	if(this.users.length) {
+		// 		return this.users.filter(user => {
+		// 			return user.login.toLowerCase().includes(this.search.toLowerCase())
+		// 		})
+		// 	} else {
+		// 		return this.users
+		// 	}
+		// }
+	}
+}
+</script>
+
+<style scoped>
+.main {
+	font-weight: 700;
+}
+.mb-3 {
+	padding-top: 5%;
+	width: 720px;
+	margin: auto;
+}
+button {
+	margin-left: 45%;
+}
+
+</style>
