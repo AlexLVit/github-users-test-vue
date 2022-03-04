@@ -49,16 +49,12 @@ export default {
 			fetch(`https://api.github.com/users/${this.search}`)
 			.then(result => result.json())
 			.then(data => {
-				this.users = data
+				if(data.message) {
+					this.getContent()
+				}else {
+					this.users = data
+				}
 			})
-		}
-	},
-	watch: {
-		//watch search input, get user list if search input is empty
-		search: function() {
-			if(this.search == '') {
-				this.getContent()
-			}
 		}
 	}
 }
