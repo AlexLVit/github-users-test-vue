@@ -57,17 +57,6 @@ export default {
 				this.getContent()
 			}
 		}
-	},
-	computed: {
-		// filteredList() {
-		// 	if(this.users.length) {
-		// 		return this.users.filter(user => {
-		// 			return user.login.toLowerCase().includes(this.search.toLowerCase())
-		// 		})
-		// 	} else {
-		// 		return this.users
-		// 	}
-		// }
 	}
 }
 </script>
