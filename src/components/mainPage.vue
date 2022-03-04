@@ -31,6 +31,7 @@ export default {
 		this.getContent()
 	},
 	methods: {
+		//get list of users with limit of 10
 		getContent(id = 1, limit = 10) {
 			fetch(`https://api.github.com/users?since=${id}&per_page=${limit}`)
 			.then(result => result.json())
@@ -43,6 +44,7 @@ export default {
 			})
 			.catch(err => console.log(err))
 		},
+		//search user with login
 		getUserByLogin() {
 			fetch(`https://api.github.com/users/${this.search}`)
 			.then(result => result.json())
@@ -52,6 +54,7 @@ export default {
 		}
 	},
 	watch: {
+		//watch search input, get user list if search input is empty
 		search: function() {
 			if(this.search == '') {
 				this.getContent()

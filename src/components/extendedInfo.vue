@@ -58,6 +58,7 @@ export default {
 		this.getRepos()
 	},    
 	methods: {
+		//get selected user information
 		getUserInfo() {
 			fetch(`https://api.github.com/users/${this.$props.login}`)
 			.then(result => result.json())
@@ -66,6 +67,7 @@ export default {
 			})
 			.catch(err => console.log(err))
 		},
+		//get list of repositories for selected user
 		getRepos(page = 1, limit = 15, sort = "full_name") {
 			fetch(`https://api.github.com/users/${this.$props.login}/repos?page=${page}&per_page=${limit}&sort=${sort}`)
 			.then(result => result.json())
