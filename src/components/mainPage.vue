@@ -46,15 +46,26 @@ export default {
 		},
 		//search user with login
 		getUserByLogin() {
-			fetch(`https://api.github.com/users/${this.search}`)
-			.then(result => result.json())
-			.then(data => {
-				if(data.message) {
-					this.getContent()
-				}else {
+			if(this.search.length) {
+				fetch(`https://api.github.com/users/${this.search}`)
+				.then(result => result.json())
+				.then(data => {
+					console.log(data)
 					this.users = data
-				}
-			})
+				})
+			}else {
+				return
+			}
+
+		}
+	},
+	watch: {
+		//watch search input, get user list if search input is empty
+		search: function() {
+			if(this.search == '') {
+				console.log("1")
+				this.getContent()
+			}
 		}
 	}
 }
